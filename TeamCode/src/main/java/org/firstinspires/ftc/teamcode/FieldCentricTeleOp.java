@@ -32,10 +32,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.CommandMecanumDrivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PivotSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem;
@@ -77,7 +76,7 @@ public class FieldCentricTeleOp extends LinearOpMode {
     private TurretSubsystem turretSS;
     private IntakeSubsystem intakeSS;
     private PivotSubsystem pivotSS;
-    private DriveSubsystem driveSS;
+    private CommandMecanumDrivetrain drivetrain;
 
     @Override
     public void runOpMode() {
@@ -87,7 +86,7 @@ public class FieldCentricTeleOp extends LinearOpMode {
         turretSS = new TurretSubsystem(hardwareMap,telemetry);
         intakeSS = new IntakeSubsystem(hardwareMap,telemetry);
         pivotSS = new PivotSubsystem(hardwareMap,telemetry,false);
-        driveSS = new DriveSubsystem(hardwareMap,telemetry);
+        drivetrain = new CommandMecanumDrivetrain(hardwareMap,telemetry);
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -118,7 +117,7 @@ public class FieldCentricTeleOp extends LinearOpMode {
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
-            driveSS.driveFieldCentric(axial, lateral, yaw);
+            drivetrain.driveFieldCentric(axial, lateral, yaw);
             
         }
     }}

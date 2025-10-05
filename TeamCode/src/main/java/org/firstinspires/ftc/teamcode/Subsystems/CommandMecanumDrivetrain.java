@@ -5,14 +5,11 @@ import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-import kotlin.Unit;
-
-public class DriveSubsystem extends SubsystemBase {
+public class CommandMecanumDrivetrain extends SubsystemBase {
     private final Telemetry telemetry;
     public Motor frontRightMotor;
     public Motor frontLeftMotor;
@@ -21,7 +18,7 @@ public class DriveSubsystem extends SubsystemBase {
     public MecanumDrive drivetrain;
     public GoBildaPinpointDriver odo;
 
-    public DriveSubsystem(HardwareMap hwMap, Telemetry telemetry) {
+    public CommandMecanumDrivetrain(HardwareMap hwMap, Telemetry telemetry) {
         odo = hwMap.get(GoBildaPinpointDriver.class, "odo");
         this.telemetry = telemetry;
         frontRightMotor = new Motor(hwMap, "frontRight");
