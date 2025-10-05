@@ -86,7 +86,7 @@ public class FieldCentricTeleOp extends LinearOpMode {
         // to the names assigned during the robot configuration step on the DS or RC devices.
         turretSS = new TurretSubsystem(hardwareMap,telemetry);
         intakeSS = new IntakeSubsystem(hardwareMap,telemetry);
-        pivotSS = new PivotSubsystem(hardwareMap,telemetry);
+        pivotSS = new PivotSubsystem(hardwareMap,telemetry,false);
         driveSS = new DriveSubsystem(hardwareMap,telemetry);
 
         // ########################################################################################

@@ -12,12 +12,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class IntakeSubsystem extends SubsystemBase {
     private final Telemetry telemetry;
     public Motor intakeMotor;
-    public ServoEx firstDoor;
-    public ServoEx secondDoor;
-    public ServoEx thirdDoor;
-    public ColorSensor firstColorSensor;
-    public ColorSensor secondColorSensor;
-    public ColorSensor thirdColorSensor;
 
     public IntakeSubsystem(HardwareMap hwMap, Telemetry telemetry) {
         this.telemetry = telemetry;
