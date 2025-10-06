@@ -29,6 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.pedropathing.follower.Follower;
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -38,6 +40,8 @@ import org.firstinspires.ftc.teamcode.Subsystems.CommandMecanumDrivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PivotSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.VisionSubsystem;
+import org.firstinspires.ftc.teamcode.pedroPathing.PedroConstants;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -77,16 +81,21 @@ public class FieldCentricTeleOp extends LinearOpMode {
     private IntakeSubsystem intakeSS;
     private PivotSubsystem pivotSS;
     private CommandMecanumDrivetrain drivetrain;
+    private VisionSubsystem visionSS;
+    private GoBildaPinpointDriver poseEstimator;
 
     @Override
     public void runOpMode() {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
+        poseEstimator = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
         turretSS = new TurretSubsystem(hardwareMap,telemetry);
         intakeSS = new IntakeSubsystem(hardwareMap,telemetry);
         pivotSS = new PivotSubsystem(hardwareMap,telemetry,false);
         drivetrain = new CommandMecanumDrivetrain(hardwareMap,telemetry);
+        visionSS = new VisionSubsystem(hardwareMap,telemetry,poseEstimator);
+
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!

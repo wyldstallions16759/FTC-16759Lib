@@ -5,14 +5,14 @@ import org.firstinspires.ftc.teamcode.Subsystems.CommandMecanumDrivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PivotSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.VisionSS;
+import org.firstinspires.ftc.teamcode.Subsystems.VisionSubsystem;
 
 public class Superstructure {
     private CommandMecanumDrivetrain drivetrain;
     private IntakeSubsystem IntakeSS;
     private PivotSubsystem pivotSS;
     private TurretSubsystem turretSS;
-    private VisionSS visionSS;
+    private VisionSubsystem visionSubsystem;
     private Pose3D visionPose;
     private enum TurretState {
         TRACK_YES_TAG,
@@ -28,12 +28,12 @@ public class Superstructure {
     private TurretState turretState;
     private Alliance alliance;
 
-    public Superstructure(CommandMecanumDrivetrain drivetrain, IntakeSubsystem IntakeSS, PivotSubsystem pivotSS, TurretSubsystem turretSS, VisionSS visionSS) {
+    public Superstructure(CommandMecanumDrivetrain drivetrain, IntakeSubsystem IntakeSS, PivotSubsystem pivotSS, TurretSubsystem turretSS, VisionSubsystem visionSubsystem) {
         this.drivetrain = drivetrain;
         this.IntakeSS = IntakeSS;
         this.pivotSS = pivotSS;
         this.turretSS = turretSS;
-        this.visionSS = visionSS;
+        this.visionSubsystem = visionSubsystem;
         turretState = TurretState.TRACK_NO_TAG;
     }
     public void getTranslationToGoal(Alliance alliance) {
@@ -44,7 +44,7 @@ public class Superstructure {
         }
     }
     public void execute() {
-        visionPose = visionSS.get3DPose(turretSS.getTurretPose()*Constants.turretAngleMultiplier);
+        visionPose = visionSubsystem.updateVision(turretSS.getTurretPose()*Constants.turretAngleMultiplier);
         switch (turretState) {
             case TRACK_YES_TAG:
                 break;
