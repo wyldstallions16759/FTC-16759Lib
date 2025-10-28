@@ -68,7 +68,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem;
  */
 
 @TeleOp(name="Basic: Omni Linear OpMode", group="Linear OpMode")
-@Disabled
+//@Disabled
 public class FieldCentricTeleOp extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
@@ -83,9 +83,9 @@ public class FieldCentricTeleOp extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        turretSS = new TurretSubsystem(hardwareMap,telemetry);
-        intakeSS = new IntakeSubsystem(hardwareMap,telemetry);
-        pivotSS = new PivotSubsystem(hardwareMap,telemetry,false);
+//        turretSS = new TurretSubsystem(hardwareMap,telemetry);
+//        intakeSS = new IntakeSubsystem(hardwareMap,telemetry);
+//        pivotSS = new PivotSubsystem(hardwareMap,telemetry,false);
         drivetrain = new CommandMecanumDrivetrain(hardwareMap,telemetry);
 
         // ########################################################################################
@@ -114,10 +114,27 @@ public class FieldCentricTeleOp extends LinearOpMode {
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
-
+            if (gamepad1.left_bumper) {
+                drivetrain.resetGyro();
+            }
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
-            drivetrain.driveFieldCentric(axial, lateral, yaw);
-            
+
+            if (gamepad1.dpad_up) {
+                drivetrain.driveRobotCentric(0.2,0,0);
+            }
+            else if (gamepad1.dpad_down) {
+                drivetrain.driveRobotCentric(-0.2,0,0);
+            }
+            else if (gamepad1.dpad_left) {
+                drivetrain.driveRobotCentric(0,-0.2,0);
+            }
+            else if (gamepad1.dpad_right) {
+                drivetrain.driveRobotCentric(0,0.2,0);
+            }
+            else {
+                drivetrain.driveWithRotatePID(axial, lateral, yaw);
+            }
+
         }
     }}
